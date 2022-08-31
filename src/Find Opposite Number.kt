@@ -20,19 +20,19 @@ Given your house number address and length of street n, give the house number on
 3, 5 --> 8
  */
 fun main() {
-    print(overTheRoad(6, 11))
+    print(overTheRoad(12342, 817989))
 }
 fun overTheRoad(address: Int, n: Int): Int {
-    /*return if (address % 2 != 0 && address < (n * 2) / 2 ) {
-        address + ((n * 2 - 1) - (address.downTo(1).step(2).count() * 4 - 4))
-    } else 0 */
     return when {
         address % 2 != 0 && address < (n * 2) / 2 -> address + ((n * 2 - 1) - (address.downTo(1).step(2).count() * 4 - 4))
         address % 2 == 0 && address > (n * 2) / 2 -> address - ((n * 2 - 1) - ((n * 2).downTo(address).step(2).count() * 4 - 4))
         address % 2 != 0 && address > (n * 2) / 2 -> address - ((n * 2 - 1) - (address.until(n * 2).step(2).count() * 4 - 2))
         address % 2 == 0 && address < (n * 2) / 2 -> address + ((n * 2 - 1) - (address.downTo(2).step(2).count() * 4 - 2))
         else -> when {
-            n % 2 != 0 && n == address -> address + 1
+            address == n -> address + 1
+            address == n + 1 && address % 2 == 0 -> address - 1
+            address == n + 1 && address % 2 != 0 -> address - 1
+            address == n && address % 2 == 0 -> address + 1
             else -> 0
         }
     }
