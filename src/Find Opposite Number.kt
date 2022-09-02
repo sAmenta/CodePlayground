@@ -20,17 +20,20 @@ Given your house number address and length of street n, give the house number on
 3, 5 --> 8
  */
 fun main() {
-    val result = overTheRoad(7, 11)
+    val result = overTheRoad(6, 6)
     print(result)
 }
 fun overTheRoad(address: Int, n: Int): Int {
-    val caseOne = IntArray(address) { address - it }.filter { it % 2 != 0 && address < (n * 2) / 2 }.toTypedArray()
-    val casetwo = IntArray(address) { address - it }.filter { it % 2 == 0 && address > (n * 2) / 2 }.toTypedArray()
-    return return when {
-        address % 2 != 0 && address < (n * 2) / 2 -> address + ((n * 2 - 1) - (caseOne.size * 4 - 4))
-        address % 2 == 0 && address > (n * 2) / 2 -> address - ((n * 2 - 1) - (casetwo.size * 4 - 4))
-        address % 2 != 0 && address > (n * 2) / 2 -> address - ((n * 2 - 1) - (address.until(n * 2).step(2).count() * 4 - 2))
-        address % 2 == 0 && address < (n * 2) / 2 -> address + ((n * 2 - 1) - (address.downTo(2).step(2).count() * 4 - 2))
+    val caseOne = IntArray(address) { address - it }.filter { it % 2 != 0 && it < address }.toTypedArray()
+    val caseTwo = IntArray(address) { n * 2 - it }.filter { it % 2 == 0 && it > address }.toTypedArray()
+    val caseThree = IntArray(address) { (n * 2 - 1) - it }.filter { it % 2 != 0 && it >= address }.toTypedArray()
+    val caseFour = IntArray(address) { address - it }.filter { it % 2 == 0 && it >= 2 }.toTypedArray()
+
+    return when {
+        address % 2 != 0 && address < (n * 2) / 2 -> address + ((n * 2 - 1) - (caseOne.size * 4))
+        address % 2 == 0 && address > (n * 2) / 2 -> address - ((n * 2 - 1) - (caseTwo.size * 4))
+        address % 2 != 0 && address > (n * 2) / 2 -> address - ((n * 2 - 1) - (caseThree.size * 4 - 2))
+        address % 2 == 0 && address < (n * 2) / 2 -> address + ((n * 2 - 1) - (caseFour.size * 4 - 2))
         else -> when {
             address == n -> address + 1
             address == n + 1 && address % 2 == 0 -> address - 1
@@ -38,7 +41,10 @@ fun overTheRoad(address: Int, n: Int): Int {
             else -> 0
         }
     }
-    /*return when {
+
+    /*
+    fun overTheRoad(address: Int, n: Int): Int {
+    return when {
         address % 2 != 0 && address < (n * 2) / 2 -> address + ((n * 2 - 1) - (address.downTo(1).step(2).count() * 4 - 4))
         address % 2 == 0 && address > (n * 2) / 2 -> address - ((n * 2 - 1) - ((n * 2).downTo(address).step(2).count() * 4 - 4))
         address % 2 != 0 && address > (n * 2) / 2 -> address - ((n * 2 - 1) - (address.until(n * 2).step(2).count() * 4 - 2))
@@ -49,5 +55,7 @@ fun overTheRoad(address: Int, n: Int): Int {
             address == n + 1 && address % 2 != 0 -> address - 1
             else -> 0
         }
-    }*/
+    }
+}
+     */
 }
