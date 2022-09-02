@@ -24,10 +24,11 @@ fun main() {
     print(result)
 }
 fun overTheRoad(address: Int, n: Int): Int {
-    val caseOne = IntArray(address) { address - it }.filter { it % 2 != 0 && it < address }.toTypedArray()
-    val caseTwo = IntArray(address) { n * 2 - it }.filter { it % 2 == 0 && it > address }.toTypedArray()
-    val caseThree = IntArray(address) { (n * 2 - 1) - it }.filter { it % 2 != 0 && it >= address }.toTypedArray()
-    val caseFour = IntArray(address) { address - it }.filter { it % 2 == 0 && it >= 2 }.toTypedArray()
+    val caseOne = IntArray(address) { address - it }.filter { it % 2 != 0 && it < address }.toTypedArray().toIntArray()
+    val caseTwo = IntArray(address) { n * 2 - it }.filter { it % 2 == 0 && it > address }.toTypedArray().toIntArray()
+    val caseThree =
+        IntArray(address) { (n * 2 - 1) - it }.filter { it % 2 != 0 && it >= address }.toTypedArray().toIntArray()
+    val caseFour = IntArray(address) { address - it }.filter { it % 2 == 0 && it >= 2 }.toTypedArray().toIntArray()
 
     return when {
         address % 2 != 0 && address < (n * 2) / 2 -> address + ((n * 2 - 1) - (caseOne.size * 4))
@@ -41,6 +42,7 @@ fun overTheRoad(address: Int, n: Int): Int {
             else -> 0
         }
     }
+}
 
     /*
     fun overTheRoad(address: Int, n: Int): Int {
@@ -58,4 +60,3 @@ fun overTheRoad(address: Int, n: Int): Int {
     }
 }
      */
-}
