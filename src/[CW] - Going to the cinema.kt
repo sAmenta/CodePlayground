@@ -29,30 +29,44 @@ movie(100, 10, 0.95) should return 24
 import kotlin.math.*
 
 fun main() {
-    val card = 500
-    val ticket = 15
-    val perc = 0.90
+    val card = 100
+    val ticket = 10
+    val perc = 0.95
 
     print(movie(card, ticket, perc))
 }
 
+/* this solution gets stuck in the loop
 fun movie (card: Int, ticket: Int, perc: Double): Int {
-    var visits = 1
-    var ticketPrice = ticket.toDouble()
+    var visits = 2
+    var fractionedPrice = ticket.toDouble()
     var systemA = 0
-    var systemB: Double
+    var systemB = card + ticket * perc
 
     do {
-        systemB = card + ticket * perc
-        if (visits > 1) {
-            systemA = ticket * visits
-            repeat (visits - 1) {
-                ticketPrice *= perc
-                systemB += ticketPrice * perc
-            }
+        systemA = ticket * visits
+        repeat (visits - 1) {
+            fractionedPrice = fractionedPrice.times(perc)
         }
+        systemB += fractionedPrice * perc
+        fractionedPrice = ticket.toDouble()
         visits++
     } while (ceil(systemB) > systemA)
 
-    return visits
+    return visits - 1
+}*/
+
+fun movie(card:Int, ticket:Int, perc:Double):Int {
+    var systemA = 0
+    var systemB = card.toDouble()
+    var prev = ticket.toDouble()
+    var times = 0
+    while (systemA <= ceil(systemB))
+    {
+        systemA += ticket
+        prev *= perc
+        systemB += prev
+        times += 1
+    }
+    return times
 }
