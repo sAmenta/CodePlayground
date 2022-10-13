@@ -9,3 +9,26 @@ followed by the strings sorted in alphabetic order. The values must maintain the
 
 Note that numbers written as strings are strings and must be sorted with the other strings.
  */
+
+fun main() {
+    val a = arrayOf<Any>("Apple",46,"287",574,"Peach","3","69",78,"Grape","423")
+    val sortedArray = ::dbSort
+    print(sortedArray(a).joinToString())
+}
+
+fun dbSort(a:Array<Any>):Array<Any> {
+    val numbers = a.filterIsInstance<Int>().sorted().toMutableList()
+    val strings = a.filterIsInstance<String>().sorted().toMutableList()
+    val combined = mutableListOf<Any>()
+
+    combined.addAll(numbers)
+    combined.addAll(strings)
+
+    return combined.toTypedArray()
+}
+
+/*
+alternative solutions
+
+fun dbSort(a: Array<Any>): Array<Any> = (a.filterIsInstance<Int>().sortedBy { it } + a.filterIsInstance<String>().sorted()).toTypedArray()
+ */
