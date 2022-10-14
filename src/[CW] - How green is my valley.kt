@@ -46,7 +46,7 @@ make_valley(a) => [14, 14, *14*, 14, 14]
  */
 
 fun main() {
-    val a = intArrayOf(66, 55, 100, 68, 46, -82, 12, 72, 12, 38)
+    val a = intArrayOf(14,14,14,14,7,14)
     print(makeValley(a).joinToString())
 }
 
@@ -57,8 +57,8 @@ fun makeValley(arr: IntArray): IntArray {
 
     for (i in sortedArray.indices) {
         if (i % 2 == 0) {
-            leftWing += arr[i]
-        } else rightWin += arr[i]
+            leftWing += sortedArray[i]
+        } else rightWin += sortedArray[i]
     }
-    return sortedArray
+    return leftWing + rightWin.reversedArray()
 }
